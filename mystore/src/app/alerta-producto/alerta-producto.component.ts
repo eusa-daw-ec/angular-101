@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { datosProductos } from '../datosProductos';
 import { Producto } from '../productosInterface';
 
 
@@ -15,6 +14,5 @@ export class AlertaProductoComponent {
 
   @Input() producto!: Producto;
   @Output() aviso = new EventEmitter();
-
 
 }

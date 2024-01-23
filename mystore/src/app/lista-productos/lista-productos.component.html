@@ -15,7 +15,6 @@
 
   <button (click)="compartir()">Compartir</button>
 
-  <app-alerta-producto [producto]="producto">
-  </app-alerta-producto>
+  <app-alerta-producto [producto]="producto" (aviso)="onAviso()"></app-alerta-producto>
 
 </div>
