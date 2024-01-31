@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 })
 export class ApiService {
 
-    private frase: Frase = { id: "", quote: ""};
+  private frase: Frase = { id: "", quote: "" };
   private ChiquitoUrl = "https://chiquitadas.es/api/quotes/avoleorrr"; // URL to web api
 
   constructor(private http: HttpClient) { }

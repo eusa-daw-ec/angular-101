@@ -1,11 +1,7 @@
-<app-dado (propagar)="asignar1($event)"></app-dado>
-<app-dado (propagar)="asignar2($event)"></app-dado>
-<app-dado (propagar)="asignar3($event)"></app-dado>
+<div *ngFor="let n of [1, 2, 3]">
+    <app-dado (propagar)="sumar($event)"></app-dado>
+</div>
 
 <hr>
 
-<p>Valor del dado1: {{ valor1 }}</p>
-<p>Valor del dado2: {{ valor2 }}</p>
-<p>Valor del dado3: {{ valor3 }}</p>
-
-<h1>Suma: {{ valor1 + valor2 + valor3 }}</h1>
+<h1>Suma: {{ suma }}</h1>
