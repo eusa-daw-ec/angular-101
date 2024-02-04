@@ -1,0 +1,37 @@
+<div>
+  <h1>Listado de inventario</h1>
+  <table border="1">
+    <tr>
+      <td>Codigo</td>
+      <td>Descripcion</td>
+      <td>Precio Ud.</td>
+      <td>Cantidad</td>
+      <td>Unidad</td>
+      <td>Acciones</td>
+    </tr>
+
+    @for (item of articulos; track $index) {
+
+    <tr>
+      <td>{{ item.codigo }}</td>
+      <td>{{ item.descripcion }}</td>
+      <td>{{ item.precio }}</td>
+      <td>{{ item.cantidad }}</td>
+      <td>{{ item.unidad }}</td>
+      <td><button>Borrar</button><button>Editar</button></td>
+    </tr>
+
+    }
+  </table>
+
+  <div>
+    <p>Codigo:<input type="number" [(ngModel)]="articulo.codigo"/></p>
+    <p>descripcion:<input type="text" /></p>
+    <p>precio:<input type="number" /></p>
+    <p>cantidad:<input type="number" /></p>
+    <p>unidad:<input type="text" /></p>
+    <p><button>Agregar</button> <button>Modificar</button></p>
+  </div>
+
+ 
+</div>
