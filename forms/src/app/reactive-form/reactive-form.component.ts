@@ -9,7 +9,6 @@ import {
   FormControl,
   Validators,
   FormBuilder,
-  ValidatorFn,
 } from '@angular/forms';
 
 @Component({
@@ -29,7 +28,7 @@ export class ReactiveFormComponent {
       password: new FormControl('', Validators.required),
       repeatPass: new FormControl('', Validators.required),
     },
-    {validators: this.MustMatch('password', 'repeatPass')}
+    // {validators: this.MustMatch('password', 'repeatPass')}
   );
 
   MustMatch(controlName: string, matchingControlName: string) {
