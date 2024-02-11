@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
@@ -6,9 +6,10 @@ import {
   FormsModule,
   ReactiveFormsModule,
   FormGroup,
-  FormControl,
   Validators,
   FormBuilder,
+  AbstractControl,
+  ValidationErrors,
 } from '@angular/forms';
 
 @Component({
@@ -18,41 +19,38 @@ import {
   templateUrl: './reactive-form.component.html',
   styleUrls: ['./reactive-form.component.css'],
 })
-export class ReactiveFormComponent {
-  submitted = false;
+export class ReactiveFormComponent implements OnInit {
+  public submitted = false;
+  public registerForm!: FormGroup;
 
-  registerForm = new FormGroup(
-    {
-      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required),
-      repeatPass: new FormControl('', Validators.required),
-    },
-    // {validators: this.MustMatch('password', 'repeatPass')}
-  );
+  constructor(private _fb: FormBuilder) {}
 
-  MustMatch(controlName: string, matchingControlName: string) {
-    // La función devuelta es el validador personalizado que será utilizado por el formulario reactivo
-    return (formGroup: FormGroup) => {
-      // Obtener los controles de los campos que se están comparando
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
-
-      // Verificar si ya existe un error 'mustMatch' en matchingControl
-      if (matchingControl.errors && !matchingControl.errors['mustMatch']) {
-        // Devolver si otro validador ya ha encontrado un error en matchingControl
-        return;
+  ngOnInit(): void {
+    this.registerForm = this._fb.group(
+      {
+        name: ['', [Validators.required, Validators.minLength(3)]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required]],
+        repeatPass: ['', [Validators.required, Validators.minLength(8)]],
+      },
+      {
+        validator: this.mustMatch('password', 'repeatPass'),
       }
+    );
+  }
 
-      // Establecer un error en matchingControl si la validación falla
-      if (control.value !== matchingControl.value) {
-        matchingControl.setErrors({ mustMatch: true });
-      } else {
-        // Eliminar el error si la validación es exitosa
-        matchingControl.setErrors(null);
+  mustMatch(controlName: string, matchingControlName: string) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const controlValue = control.get(controlName)?.value;
+      const matchingControlValue = control.get(matchingControlName)?.value;
+
+      if (controlValue !== matchingControlValue) {
+        return { mustMatch: null };
       }
+      return { mustMatch: true };
     };
   }
+
 
   get f() {
     return this.registerForm.controls;

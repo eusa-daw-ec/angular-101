@@ -6,54 +6,69 @@
     <input
       type="text"
       formControlName="name"
+      name="name"
       class="form-control"
-      [ngClass]="{ 'is-invalid': f.name.errors }"
+      [ngClass]="{ 'is-invalid': f['name'].errors }"
+      autocomplete
     />
-    <div *ngIf="f.name.errors" class="invalid-feedback">
-      <div *ngIf="f.name.errors['required']">El nombre es obligatorio</div>
+
+    <div *ngIf="f['name'].errors" class="invalid-feedback">
+      <div *ngIf="f['name'].errors['required']">El nombre es obligatorio</div>
+      <div *ngIf="f['name'].errors['minlength']">
+        El nombre ha de tener al menos 3 caracteres
+      </div>
     </div>
 
     <label>Email</label>
     <input
       type="text"
       formControlName="email"
+      name="email"
       class="form-control"
-      [ngClass]="{ 'is-invalid': f.email.errors }"
+      [ngClass]="{ 'is-invalid': f['email'].errors }"
+      autocomplete
     />
-    <div *ngIf="f.email.errors" class="invalid-feedback">
-      <div *ngIf="f.email.errors['required']">El email es obligatorio</div>
-      <div *ngIf="f.email.errors['email']">El email debe de ser válido</div>
+    <div *ngIf="f['email'].errors" class="invalid-feedback">
+      <div *ngIf="f['email'].errors['required']">El email es obligatorio</div>
+      <div *ngIf="f['email'].errors['email']">El email debe de ser válido</div>
     </div>
 
     <label>Contraseña</label>
     <input
       type="password"
       formControlName="password"
+      name="password"
       class="form-control"
-      [ngClass]="{ 'is-invalid': f.password.errors }"
+      [ngClass]="{ 'is-invalid': f['password'].errors }"
     />
-    <div *ngIf="f.password.errors" class="invalid-feedback">
-      <div *ngIf="f.password.errors['required']">Se requiere una contraseña</div>
-      <div *ngIf="f.password.errors['minlength']">
-        La contraseña tiene que tener al menos 6 caracteres
-      </div>
+
+    @if(f['password'].errors) { @if(f['password'].errors['required']) {
+    <div class="invalid-feedback">Es necesario introducir una contraseña</div>
+    } @if(!f['password'].errors['mustMatch']) {
+    <div class="invalid-feedback">Las contraseñas deben coincidir</div>
+    } @if(f['password'].errors['minlength']) {
+    <div class="invalid-feedback">
+      La contraseña tiene que tener al menos 8 caracteres
     </div>
+    } }
 
     <label>Repetir contraseña</label>
     <input
       type="password"
       formControlName="repeatPass"
+      name="repeatPass"
       class="form-control"
-      [ngClass]="{ 'is-invalid': f.repeatPass.errors }"
+      [ngClass]="{ 'is-invalid': f['repeatPass'].errors }"
     />
-    <div *ngIf="f.repeatPass.errors" class="invalid-feedback">
-      <div *ngIf="f.repeatPass.errors['required']">
-        Es necesario repetir contraseña
-      </div>
-      <div *ngIf="f.repeatPass.errors['MustMatch']">
-        Las contraseñas deben de coincidir
-      </div>
+    @if(f['repeatPass'].errors) { @if(f['repeatPass'].errors['required']) {
+    <div class="invalid-feedback">Es necesario repetir contraseña</div>
+    } @if(!f['repeatPass'].errors['mustMatch']) {
+    <div class="invalid-feedback">Las contraseñas deben coincidir</div>
+    } @if(f['repeatPass'].errors['minlength']) {
+    <div class="invalid-feedback">
+      La contraseña tiene que tener al menos 8 caracteres
     </div>
+    } }
 
     <div class="text-center">
       <button class="btn btn-primary mr-1" [disabled]="registerForm.invalid">
