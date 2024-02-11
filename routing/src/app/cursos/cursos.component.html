@@ -1,1 +1,14 @@
-<p>cursos works!</p>
+<h3>Catálogo de cursos</h3>
+<ul>
+  @for (curso of listaCursos; track $index) {
+
+  <li>
+    <a [routerLink]="[curso.id]" routerLinkActive="active">{{
+      curso.nombre
+    }}</a>
+  </li>
+
+  }
+</ul>
+
+<router-outlet></router-outlet>

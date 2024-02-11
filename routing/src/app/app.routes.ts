@@ -10,5 +10,5 @@ export const routes: Routes = [
     { path: 'contacto', component: ContactoComponent },
     { path: 'acercade', component: AcercadeComponent },
     { path: 'cursos', component: CursosComponent },
-    { path: 'cursos/:curso', component: DetalleCursoComponent },
+    { path: 'cursos/:id', component: DetalleCursoComponent },
 ];
