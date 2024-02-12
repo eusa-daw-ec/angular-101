@@ -2,15 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { Articulo } from '../../modelo/articulo';
 import { ApiServiceService } from '../../servicios/api-service.service';
 import { CommonModule } from '@angular/common';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-lista-articulos',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './lista-articulos.component.html',
   styleUrl: './lista-articulos.component.css',
 })
 export class ListaArticulosComponent implements OnInit {
+  formulario!: FormGroup;
+
   public listaArticulos: Articulo[] = [];
 
   public articuloActual: Articulo = {
@@ -25,10 +33,25 @@ export class ListaArticulosComponent implements OnInit {
     this.codSel = valor || null;
   }
 
-  constructor(private apiService: ApiServiceService) {}
+  constructor(private apiService: ApiServiceService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.listarArticulos();
+    this.inicializaFormulario();
+  }
+
+  inicializaFormulario() {
+    this.formulario = this.fb.group({
+      id: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      precio: ['', Validators.required],
+    });
+  }
+
+  enviarFormulario() {
+    // Acceder a los valores del formulario
+    const articuloGuardado = this.formulario.value;
+    console.log('Artículo guardado:', articuloGuardado);
   }
 
   listarArticulos() {
@@ -61,11 +84,7 @@ export class ListaArticulosComponent implements OnInit {
   }
 
   editarArticulo(codSel: string) {
-    const articuloActualizado = {
-      // Proporciona los datos actualizados del artículo según tu modelo
-      descripcion: 'manzanas golden',
-      precio: 20.55,
-    };
+    const articuloActualizado = this.formulario.value
 
     this.apiService
       .updateArticulo(codSel, articuloActualizado)
@@ -78,6 +97,7 @@ export class ListaArticulosComponent implements OnInit {
   verArticulo(codSel: string) {
     return this.apiService.viewArticulo(codSel).subscribe((articulo) => {
       this.articuloActual = articulo;
+      this.formulario.patchValue(this.articuloActual);
     });
   }
 }

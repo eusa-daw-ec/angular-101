@@ -2,13 +2,13 @@
   "articulos": [
     {
       "id": "2",
-      "descripcion": "patatas",
-      "precio": 54.25
+      "descripcion": "peras",
+      "precio": "11.20"
     },
     {
-      "id": "3",
-      "descripcion": "sandías",
-      "precio": 14.67
+      "id": "1",
+      "descripcion": "sandias",
+      "precio": "25.23"
     },
     {
       "id": "1",

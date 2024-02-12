@@ -3,23 +3,19 @@
   <tr *ngFor="let articulo of listaArticulos">
     <td>{{ articulo.id }}</td>
     <td>{{ articulo.descripcion }}</td>
+    <td>{{ articulo.precio }}</td>
     <button (click)="borrarArticulo(articulo.id)">Borrar</button>
-    <button (click)="editarArticulo(articulo.id)">Editar</button>
-    <button (click)="verArticulo(articulo.id)">Visualizar</button>
+    <button (click)="verArticulo(articulo.id)">Editar</button>
   </tr>
 </table>
 
-<button (click)="crearArticulo()">Crear</button>
 
-<h2>Articulo visualizado</h2>
-@if (articuloActual.id !='') {
-<div>
-  <ul>
-    <li>Id: {{ articuloActual.id }}</li>
-    <li>Descripción: {{ articuloActual.descripcion }}</li>
-    <li>Precio: {{ articuloActual.precio }}</li>
-  </ul>
-</div>
-} @else {
-<p>No hay selección activa...</p>
-}
+
+<h4>Gestión de artículos</h4>
+<button (click)="crearArticulo()">Crear</button>
+<form [formGroup]="formulario">
+  <div><input type="text" formControlName="id" placeholder="id..." /></div>
+  <div><input type="text" formControlName="descripcion" placeholder="descripcion..." /></div>
+  <div><input type="text" formControlName="precio" placeholder="precio..." /></div>
+  <div><button (click)="editarArticulo(formulario.get('id')?.value)">Enviar</button><input type="reset"></div>
+</form>
