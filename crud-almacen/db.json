@@ -1,0 +1,19 @@
+{
+  "articulos": [
+    {
+      "id": "2",
+      "descripcion": "patatas",
+      "precio": 54.25
+    },
+    {
+      "id": "3",
+      "descripcion": "sandías",
+      "precio": 14.67
+    },
+    {
+      "id": "1",
+      "descripcion": "manzanas",
+      "precio": 12.34
+    }
+  ]
+}
