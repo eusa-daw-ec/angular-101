@@ -21,8 +21,5 @@ export class VerfraseComponent implements OnInit {
     this.apiservice.getFrase().subscribe(frase => (this.frase = frase));
   }
 
-  
-
-  
 
 }
