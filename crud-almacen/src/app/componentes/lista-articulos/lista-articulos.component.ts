@@ -27,7 +27,9 @@ export class ListaArticulosComponent implements OnInit {
     precio: 0,
   };
 
-  codSel: string | null = '';
+  private codSel: string | null = '';
+
+  public modoEdicion: boolean = false;
 
   onInputChange(valor: string | null) {
     this.codSel = valor || null;
@@ -70,20 +72,25 @@ export class ListaArticulosComponent implements OnInit {
   }
 
   crearArticulo() {
-    const nuevoArticulo = {
-      // Proporciona los datos del nuevo artículo según tu modelo
-      id: '1',
-      descripcion: 'manzanas',
-      precio: 12.34,
-    };
+    
+    // Verifica si el formulario es válido antes de continuar
+    if (this.formulario.valid) {
+      const nuevoArticulo = this.formulario.value;
 
-    this.apiService.createArticulo(nuevoArticulo).subscribe(() => {
-      console.log('Artículo creado');
-      this.listarArticulos();
-    });
+      this.apiService.createArticulo(nuevoArticulo).subscribe(() => {
+        console.log('Artículo creado');
+        this.listarArticulos();
+        this.inicializaFormulario();
+      });
+    } else {
+      // El formulario no es válido, puedes mostrar mensajes de error o realizar otras acciones
+      alert('El formulario no es válido. Por favor, completa todos los campos.');
+    }
   }
 
   editarArticulo(codSel: string) {
+
+    if (this.formulario.valid) {
     const articuloActualizado = this.formulario.value
 
     this.apiService
@@ -91,13 +98,19 @@ export class ListaArticulosComponent implements OnInit {
       .subscribe(() => {
         console.log('Artículo editado');
         this.listarArticulos();
+        this.inicializaFormulario();
+        this.modoEdicion = false;
       });
+    } else {
+      alert('El formulario no es válido. Por favor, completa todos los campos.')
+    }
   }
 
   verArticulo(codSel: string) {
     return this.apiService.viewArticulo(codSel).subscribe((articulo) => {
       this.articuloActual = articulo;
       this.formulario.patchValue(this.articuloActual);
+      this.modoEdicion = true;
     });
   }
 }

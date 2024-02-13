@@ -1,19 +1,14 @@
 {
   "articulos": [
     {
-      "id": "2",
-      "descripcion": "peras",
-      "precio": "11.20"
-    },
-    {
-      "id": "1",
-      "descripcion": "sandias",
-      "precio": "25.23"
-    },
-    {
       "id": "1",
       "descripcion": "manzanas",
-      "precio": 12.34
+      "precio": "10.45"
+    },
+    {
+      "id": "2",
+      "descripcion": "peras conference",
+      "precio": 23.45
     }
   ]
 }

@@ -9,13 +9,27 @@
   </tr>
 </table>
 
-
-
 <h4>Gestión de artículos</h4>
-<button (click)="crearArticulo()">Crear</button>
+
 <form [formGroup]="formulario">
   <div><input type="text" formControlName="id" placeholder="id..." /></div>
-  <div><input type="text" formControlName="descripcion" placeholder="descripcion..." /></div>
-  <div><input type="text" formControlName="precio" placeholder="precio..." /></div>
-  <div><button (click)="editarArticulo(formulario.get('id')?.value)">Enviar</button><input type="reset"></div>
+  <div>
+    <input
+      type="text"
+      formControlName="descripcion"
+      placeholder="descripcion..."
+    />
+  </div>
+  <div>
+    <input type="text" formControlName="precio" placeholder="precio..." />
+  </div>
+
+  <div>
+    @if (modoEdicion) {
+    <button (click)="editarArticulo(formulario.get('id')?.value)">
+      Enviar
+    </button>
+    } @else {<button (click)="crearArticulo()">Crear</button>}
+    <input type="reset" />
+  </div>
 </form>

@@ -19,8 +19,7 @@ export class ApiServiceService {
     precio: 0,
   };
 
-  apiURL: string =
-    'https://sturdy-orbit-jj566gpx5w7v3jpg-3000.app.github.dev/articulos';
+  apiURL: string = 'http://localhost:3000/articulos';
 
   constructor(private http: HttpClient) {}
 
