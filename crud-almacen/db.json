@@ -2,13 +2,18 @@
   "articulos": [
     {
       "id": "1",
-      "descripcion": "manzanas",
+      "descripcion": "manzanas golden",
       "precio": "10.45"
     },
     {
       "id": "2",
       "descripcion": "peras conference",
       "precio": 23.45
+    },
+    {
+      "id": "3",
+      "descripcion": "sandias sin pepitas",
+      "precio": "20.34"
     }
   ]
 }

@@ -19,7 +19,8 @@ export class ApiServiceService {
     precio: 0,
   };
 
-  apiURL: string = 'http://localhost:3000/articulos';
+  // apiURL: string = 'http://localhost:3000/articulos';
+  apiURL: string = 'https://curly-doodle-g4q99pvgq75vfvwj7-3000.app.github.dev/articulos';
 
   constructor(private http: HttpClient) {}
 
